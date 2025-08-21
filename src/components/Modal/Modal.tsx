@@ -1,14 +1,14 @@
-import css from "./MovieModal.module.css";
-import { createPortal } from "react-dom";
 import { useEffect } from "react";
-import type { Movie } from "../../types/movie";
+import css from "./Modal.module.css";
+import { createPortal } from "react-dom";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
-interface MovieModalProps {
-  movie: Movie;
+interface ModalProps {
   onClose: () => void;
+  children: React.ReactNode;
 }
 
-export default function MovieModal({ movie, onClose }: MovieModalProps) {
+const Modal = ({ onClose, children }: ModalProps) => {
   const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
       onClose();
@@ -33,34 +33,24 @@ export default function MovieModal({ movie, onClose }: MovieModalProps) {
 
   return createPortal(
     <div
+      onClick={handleBackdropClick}
       className={css.backdrop}
       role="dialog"
       aria-modal="true"
-      onClick={handleBackdropClick}
     >
       <div className={css.modal}>
         <button
           className={css.closeButton}
-          aria-label="Close modal"
           onClick={onClose}
-        ></button>
-        <img
-          src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-          alt={movie.title}
-          className={css.image}
-        />
-        <div className={css.content}>
-          <h2>{movie.title}</h2>
-          <p>{movie.overview}</p>
-          <p>
-            <strong>Release Date:</strong> {movie.release_date}
-          </p>
-          <p>
-            <strong>Rating:</strong> {movie.vote_average}/10
-          </p>
-        </div>
+          aria-label="Close modal"
+        >
+          {<IoIosCloseCircleOutline />}
+        </button>
+        {children}
       </div>
     </div>,
     document.body,
   );
-}
+};
+
+export default Modal;
