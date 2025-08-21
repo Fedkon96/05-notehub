@@ -8,5 +8,5 @@ export interface Note {
 }
 
 export interface NoteTag {
-  tag: string;
+  tag: "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
 }

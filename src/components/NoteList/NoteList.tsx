@@ -2,7 +2,6 @@ import { deleteNote } from "../../services/noteService";
 import { Note } from "../../types/note";
 import css from "./NoteList.module.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { TbHttpDelete } from "react-icons/tb";
 
 interface NoteListProps {
   notes: Note[];
@@ -29,7 +28,7 @@ const NoteList = ({ notes }: NoteListProps) => {
               onClick={() => mutation.mutate(note.id)}
               className={css.button}
             >
-              {<TbHttpDelete />}
+              DEL
             </button>
           </div>
         </li>

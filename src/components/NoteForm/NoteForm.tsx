@@ -21,7 +21,7 @@ const ValidationSchema = Yup.object().shape({
     .max(50, "Title must have max 50 characters")
     .required("Required"),
   content: Yup.string().max(500, "Description must have max 500 characters"),
-  status: Yup.string()
+  tag: Yup.string()
     .oneOf(["Todo", "in-Work", "Personal", "Meeting", "Shopping"])
     .required("Required"),
 });
@@ -39,6 +39,7 @@ const NoteForm = ({ onClose }: NoteFormProps) => {
     values: FormValues,
     actions: FormikHelpers<FormValues>,
   ) => {
+    console.log(values);
     mutation.mutate(values);
     actions.resetForm();
   };
@@ -83,11 +84,7 @@ const NoteForm = ({ onClose }: NoteFormProps) => {
           <button type="button" className={css.cancelButton}>
             Cancel
           </button>
-          <button
-            type="submit"
-            className={css.submitButton}
-            //   disabled=false
-          >
+          <button type="submit" className={css.submitButton} disabled={false}>
             Create note
           </button>
         </div>

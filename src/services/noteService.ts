@@ -4,14 +4,11 @@ import { Note } from "../types/note";
 const myKey = import.meta.env.VITE_NOTEHUB_TOKEN;
 
 const api = axios.create({
-  baseURL: "https://api.notehub.com",
+  baseURL: "https://notehub-public.goit.study/api",
   headers: {
     Authorization: `Bearer ${myKey}`,
     Accept: "application/json",
   },
-  // httpsAgent: new https.Agent({
-  //   rejectUnauthorized: false,
-  // }),
 });
 
 interface FetchNotesParams {
@@ -36,7 +33,7 @@ export async function fetchNotes({
   page,
 }: FetchNotesParams): Promise<FetchNotesResponse> {
   const { data } = await api.get<FetchNotesResponse>("/notes", {
-    params: { search, page, perPage: 10 },
+    params: { search, page, perPage: 6 },
   });
   return data;
 }

@@ -36,6 +36,7 @@ const App = () => {
 
   const handleSearch = useDebouncedCallback((value: string) => {
     setSearch(value);
+    setPage(1);
   }, 1000);
 
   return (
@@ -54,10 +55,10 @@ const App = () => {
         </button>
       </header>
 
-      {isSuccess && data && data?.notes.length > 0 ? (
+      {isSuccess && data.notes.length > 0 ? (
         <NoteList notes={data.notes} />
       ) : (
-        !isLoading && <p>Notes not found</p>
+        <p>Notes not found</p>
       )}
       {isLoading && !data && <Loader />}
       {isError && <ErrorMessage />}
