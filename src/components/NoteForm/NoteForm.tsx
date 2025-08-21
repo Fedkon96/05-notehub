@@ -22,7 +22,7 @@ const ValidationSchema = Yup.object().shape({
     .required("Required"),
   content: Yup.string().max(500, "Description must have max 500 characters"),
   tag: Yup.string()
-    .oneOf(["Todo", "in-Work", "Personal", "Meeting", "Shopping"])
+    .oneOf(["Todo", "Work", "Personal", "Meeting", "Shopping"])
     .required("Required"),
 });
 // !!!
@@ -81,7 +81,7 @@ const NoteForm = ({ onClose }: NoteFormProps) => {
         </div>
 
         <div className={css.actions}>
-          <button type="button" className={css.cancelButton}>
+          <button onClick={onClose} type="button" className={css.cancelButton}>
             Cancel
           </button>
           <button type="submit" className={css.submitButton} disabled={false}>
